@@ -1,7 +1,7 @@
 import boto3
 
 
-def get_s3(key, secret_key, region_name):
+def gen_s3(key, secret_key, region_name):
     """
     gen s3 by keys instead of "boto3.resource('s3')"
     when you didn't do "aws configure" well
