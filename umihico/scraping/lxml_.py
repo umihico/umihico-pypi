@@ -1,3 +1,5 @@
+from lxml.etree import ElementBase as _ElementBase
+
 
 def elements_to_strings_list(lxml_elements):
     lxml_elements = lxml_elements if isinstance(
