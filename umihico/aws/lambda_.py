@@ -17,10 +17,9 @@ def trigger_via_apigateway(url, api_key=None, payload=None):
 if __name__ == '__main__':
     def test_trigger_via_apigateway():
         payload = {
-            "prefecture": "栃木",
-            "city": "下野",
-            "town": "薬師寺"
+            "api_key": "test!",
         }
+        # not valid url and key, don't worry
         url = "https://k0ch7iuaj4.execute-api.us-west-2.amazonaws.com/default/asyc_superfast_receiver"
         api_key = "JJnYqNMTBU1LdIEjaSYL43G4OGfysL9B1In5oPoy"
         return trigger_via_apigateway(url, api_key, payload)
@@ -28,11 +27,11 @@ if __name__ == '__main__':
     import ast
 
     def lambda_handler(event, context):
-        """returns "下野"  if lambda_handler is like this."""
-        d = ast.literal_eval(event['body'])
+        """returns "test!"  if lambda_handler is like this."""
+        payload = ast.literal_eval(event['body'])
         return {
             "statusCode": 200,
-            "body": d['city']
+            "body": payload['api_key']
         }
 
     response = test_trigger_via_apigateway()

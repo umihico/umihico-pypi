@@ -1,5 +1,5 @@
 import requests as _requests
-
+from urllib.parse import urlparse as _urlparse
 _base_headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "Accept-Encoding": "gzip, deflate, br",
@@ -12,9 +12,13 @@ def get(url, header_lang="ja,en-US;q=0.9,en;q=0.8", proxy=None):
     headers = _base_headers.copy()
     if header_lang:
         headers['Accept-Language'] = header_lang
-    headers['Host'] = urlparse(url).netloc
+    headers['Host'] = _urlparse(url).netloc
     kw = {"headers": headers, }
     if proxy:
         kw['proxies'] = {'http': 'http://' + proxy,
                          'https': 'http://' + proxy, }
     return _requests.get(url, **kw)
+
+
+if __name__ == '__main__':
+    print(get("https://www.nasdaq.com/").status_code)
