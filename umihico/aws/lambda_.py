@@ -2,6 +2,7 @@
 
 import requests as _requests
 import json as _json
+import functools
 
 
 def trigger_via_apigateway(url, api_key=None, payload=None):
@@ -12,6 +13,25 @@ def trigger_via_apigateway(url, api_key=None, payload=None):
     if payload:
         kw['data'] = _json.dumps(payload)
     return _requests.request(method, url, **kw)
+
+
+def lambda_apigateway_wrapper(lambda_handler):
+    @functools.wraps(lambda_handler)
+    def lambda_handler_wrapper(event, context):
+        try:
+            body = lambda_handler(event, context)
+            statusCode = 200
+        except Exception as e:
+            statusCode = 500
+            body = str(e)
+            _traceback.print_exc()
+            body = _traceback.format_exc()
+        finally:
+            return {"statusCode": statusCode, "body": str(body)}
+    return hoge_wrapper
+
+
+def lambda_handler(event, context):
 
 
 if __name__ == '__main__':
