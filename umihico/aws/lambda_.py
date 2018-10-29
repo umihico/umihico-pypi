@@ -17,7 +17,7 @@ def trigger_via_apigateway(url, api_key=None, payload=None):
     return _requests.request(method, url, **kw)
 
 
-def apigateway_wrapper(lambda_handler):
+def apigateway_decorator(lambda_handler):
     @_functools.wraps(lambda_handler)
     def lambda_handler_wrapper(event, context):
         try:
@@ -32,7 +32,7 @@ def apigateway_wrapper(lambda_handler):
     return lambda_handler_wrapper
 
 
-@apigateway_wrapper
+@apigateway_decorator
 def lambda_handler(event, context):
     raise
     # return 'test'
