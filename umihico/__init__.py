@@ -32,6 +32,3 @@ if __name__ == '__main__':
     import scraping
     print([_os.environ['line_api_key'], ])
     api.line.send_line('test', receiver_api_key=None)
-else:
-    from . import api
-    from . import scraping
