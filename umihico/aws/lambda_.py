@@ -21,13 +21,12 @@ def apigateway_decorator(lambda_handler):
     @_functools.wraps(lambda_handler)
     def lambda_handler_wrapper(event, context):
         try:
-            body = lambda_handler(event, context)
+            body = _pprint.pformat(lambda_handler(event, context))
             statusCode = 200
         except Exception as e:
             statusCode = 500
-            _traceback.print_exc()
             body = _traceback.format_exc()
-        # finally:
+            print(body)
         return {"statusCode": statusCode, "body": str(body)}
     return lambda_handler_wrapper
 
