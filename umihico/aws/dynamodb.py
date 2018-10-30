@@ -1,7 +1,6 @@
 
 
 import boto3 as _boto3
-from .. import zip as _zip
 
 
 def put_item(tablename, dict_):
@@ -15,17 +14,6 @@ def get_item(tablename, dict_):
     table = dynamodb.Table(tablename)
     response = table.get_item(Key=dict_)
     return response['Item']
-
-
-def get_item_zipped_text(tablename, dict_):
-    compressed_text = get_item(tablename, dict_)['text']
-    return _zip.decompress_text(compressed_text)
-
-
-def put_item_zipped_text(tablename, dict_):
-    dict_ = dict_.copy()
-    dict_['text'] = _zip.compress_text(dict_['text'])
-    return put_item(tablename, dict_)
 
 
 def list_all_tabel_names():
