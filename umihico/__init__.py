@@ -27,8 +27,10 @@ def _set_env_value(getenv_key, optional_value=None):
     return value
 
 
-if __name__ == '__main__':
-    import api
-    import scraping
-    print([_os.environ['line_api_key'], ])
-    api.line.send_line('test', receiver_api_key=None)
+from . import api
+from . import aws
+from . import hash_
+from . import io_
+from . import listing
+from . import scraping
+from . import zip
