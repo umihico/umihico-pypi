@@ -33,4 +33,5 @@ from . import hash_
 from . import io_
 from . import listing
 from . import scraping
+from . import string
 from . import zip

@@ -29,6 +29,12 @@ if __name__ == '__main__':
     print(put_item('requests_superfast_dynamo', dict_))
     dict_ = {'request_id': 8666958513584, 'chunk_id': 0}
     item = get_item('requests_superfast_dynamo', dict_)
+    dict_ = {'request_id': 8666958513584, 'chunk_id': 0}
+    item = get_item('requests_superfast_dynamo', dict_)
+    dict_ = {'request_id': 8666958513584, 'chunk_id': 0}
+    item = get_item('requests_superfast_dynamo', dict_)
+    dict_ = {'request_id': 8666958513584, 'chunk_id': 0}
+    item = get_item('requests_superfast_dynamo', dict_)
     import umihico
     import ast
     compressed_text = item['compressed_text']
