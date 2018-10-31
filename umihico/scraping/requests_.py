@@ -8,12 +8,12 @@ _base_headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36", }
 
 
-def get(url, header_lang="ja,en-US;q=0.9,en;q=0.8", proxy=None):
+def get(url, header_lang="ja,en-US;q=0.9,en;q=0.8", proxy=None, **kw):
     headers = _base_headers.copy()
     if header_lang:
         headers['Accept-Language'] = header_lang
     headers['Host'] = _urlparse(url).netloc
-    kw = {"headers": headers, }
+    kw["headers"] = headers
     if proxy:
         kw['proxies'] = {'http': 'http://' + proxy,
                          'https': 'http://' + proxy, }
