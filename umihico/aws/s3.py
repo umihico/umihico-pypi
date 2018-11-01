@@ -18,7 +18,7 @@ def download_text(bucketname, path, s3=None):
     return text
 
 
-def upload_text(bucketname, path, text, public_read=False, ContentType='text/plain', s3=None):
+def upload_text(bucketname, path, text, public_read=False, ContentType='text/plain; charset=utf-8', s3=None):
     s3 = s3 or _boto3.resource('s3')
     acl = {True: "public-read",
            False: "private"}[public_read]
