@@ -22,5 +22,13 @@ def upload_text(bucketname, path, text, public_read=False, ContentType='text/pla
     s3 = s3 or _boto3.resource('s3')
     acl = {True: "public-read",
            False: "private"}[public_read]
-    response = s3.Bucket(bucketname).put_object(ACL=acl, Body=text,
+    response = s3.Bucket(bucketname).put_object(ACL=acl, Body=text.encode('utf-8'),
                                                 Key=path, ContentType=ContentType)
+
+
+if __name__ == '__main__':
+    text = 'あいう生憎'
+    bucketname = 'superfast.umihi.co'
+    path = 'encoding.txt'
+    upload_text(bucketname, path, text)
+    print(download_text(bucketname, path))
