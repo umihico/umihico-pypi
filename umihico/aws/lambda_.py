@@ -5,7 +5,6 @@ import json as _json
 import functools as _functools
 import pprint as _pprint
 import traceback as _traceback
-import base64 as _base64
 from ..zip import compress_text as _compress_text
 from ..zip import decompress_text as _decompress_text
 import ast as _ast
@@ -14,7 +13,7 @@ import ast as _ast
 def event2args(event):
     compressed_text = event['body']
     text = _decompress_text(compressed_text)
-    return *_ast.literal_eval(text)
+    return _ast.literal_eval(text)
 
 
 def args2payload(*args):
@@ -45,9 +44,3 @@ def apigateway_decorator(lambda_handler):
             print(body)
         return {"statusCode": statusCode, "body": str(body)}
     return lambda_handler_wrapper
-
-
-@apigateway_decorator
-def lambda_handler(event, context):
-    raise
-    # return 'test'
