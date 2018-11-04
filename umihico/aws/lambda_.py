@@ -14,7 +14,7 @@ import ast as _ast
 def event2args(event):
     compressed_text = event['body']
     text = _decompress_text(compressed_text)
-    return _ast.literal_eval(text)
+    return *_ast.literal_eval(text)
 
 
 def args2payload(*args):
@@ -51,26 +51,3 @@ def apigateway_decorator(lambda_handler):
 def lambda_handler(event, context):
     raise
     # return 'test'
-
-
-if __name__ == '__main__':
-    """
-    returns "test!" if lambda_handler is like this.
-
-    def test_trigger_via_apigateway():
-        payload = {
-            "api_key": "test!",
-        }
-        # not valid url and key, don't worry
-        url = "https://k0ch7iuaj4.execute-api.us-west-2.amazonaws.com/default/asyc_superfast_receiver"
-        api_key = "JJnYqNMTBU1LdIEjaSYL43G4OGfysL9B1In5oPoy"
-        return trigger_via_apigateway(url, api_key, payload)
-    import ast
-    def lambda_handler(event, context):
-        payload = ast.literal_eval(event['body'])
-        return {
-            "statusCode": 200,
-            "body": payload['api_key']
-        }
-    """
-    print(lambda_handler(None, None))
