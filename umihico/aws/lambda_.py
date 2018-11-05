@@ -12,8 +12,11 @@ import ast as _ast
 
 def event2args(event):
     compressed_text = event['body']
-    text = _decompress_text(compressed_text)
-    return _ast.literal_eval(text)
+    if compressed_text:
+        text = _decompress_text(compressed_text)
+        return _ast.literal_eval(text)
+    else:
+        return []
 
 
 def args2payload(*args):
