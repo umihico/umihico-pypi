@@ -3,6 +3,7 @@ twine upload dist/*
 rm -rf dist
 rm -rf build
 rm -rf *.egg-info
+rm -rf umihico-*.*.*
 version=$(cat version.txt)
 git add .
 git commit -m version$version
