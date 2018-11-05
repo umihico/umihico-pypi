@@ -8,6 +8,15 @@ import traceback as _traceback
 from ..zip import compress_text as _compress_text
 from ..zip import decompress_text as _decompress_text
 import ast as _ast
+import os as _os
+
+
+def _get_content_type():
+    return _os.getenv('apigateway_decorator_Content_Type', "text/plain")
+
+
+def set_content_type(content_type="text/html"):
+    _os.environ['apigateway_decorator_Content_Type'] = content_type
 
 
 def event2args(event):
@@ -45,5 +54,5 @@ def apigateway_decorator(lambda_handler):
             statusCode = 500
             body = _traceback.format_exc()
             print(body)
-        return {"statusCode": statusCode, "body": str(body)}
+        return {"statusCode": statusCode, "headers": {"Content-Type": _get_content_type()}, "body": str(body)}
     return lambda_handler_wrapper
