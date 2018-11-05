@@ -3,16 +3,18 @@
 import boto3 as _boto3
 
 
-def put_item(tablename, dict_, region_name='us-west-2'):
-    dynamodb = _boto3.resource('dynamodb', region_name=region_name)
+def put_item(tablename, dict_,  region_name='us-west-2'):
+    dynamodb = _boto3.resource(
+        'dynamodb',  region_name=region_name)
     table = dynamodb.Table(tablename)
     return table.put_item(Item=dict_)
 
 
-def get_item(tablename, dict_, region_name='us-west-2'):
-    dynamodb = _boto3.resource('dynamodb', region_name=region_name)
+def get_item(tablename, dict_, consistent_read=False, region_name='us-west-2'):
+    dynamodb = _boto3.resource(
+        'dynamodb', region_name=region_name)
     table = dynamodb.Table(tablename)
-    response = table.get_item(Key=dict_)
+    response = table.get_item(Key=dict_, ConsistentRead=consistent_read)
     return response['Item']
 
 
