@@ -52,7 +52,7 @@ def apigateway_decorator(lambda_handler):
             statusCode = 200
         except Exception as e:
             statusCode = 500
-            body = _traceback.format_exc()
+            body = "_____error_log_____\n" + _traceback.format_exc() + "\n_____error_log_____"
             print(body)
         return {"statusCode": statusCode, "headers": {"Content-Type": _get_content_type()}, "body": str(body)}
     return lambda_handler_wrapper
