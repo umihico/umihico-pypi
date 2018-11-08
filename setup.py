@@ -5,6 +5,8 @@ requirements = [
     "requests",
     "boto3",
     "selenium",
+    "xlsxwriter",
+    "xlrd",
 ]
 
 
