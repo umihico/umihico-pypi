@@ -35,3 +35,4 @@ from . import listing
 from . import scraping
 from . import string
 from . import zip
+from . import xlsx

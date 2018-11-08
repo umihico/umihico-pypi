@@ -23,7 +23,6 @@ def upload_text(bucketname, path, text, public_read=False, ContentType='text/pla
     s3 = s3 or _boto3.resource('s3')
     acl = {True: "public-read",
            False: "private"}[public_read]
-    print(3)
     response = s3.Bucket(bucketname).put_object(
         ACL=acl, Body=_base64.b64encode(text.encode()), Key=path, ContentType=ContentType)
 
